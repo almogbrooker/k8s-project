@@ -1,4 +1,4 @@
-pipline{
+pipeline{
     agent{
         label "Jenkins-Agent"
     }
@@ -10,8 +10,6 @@ pipline{
         stage("Clean Workspace"){
             cleanWs()
         }
-    }
-    stages{
         stage("Checkout from SCM"){
             steps{
                 git branch: 'main', credentialId: 'GitHub', url: 'https://github.com/almogbrooker/k8s-project'
