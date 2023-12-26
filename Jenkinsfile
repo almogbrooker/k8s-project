@@ -7,9 +7,13 @@ pipeline{
 
     }
     stages{
+
         stage("Clean Workspace"){
-            cleanWs()
+            steps{
+               cleanWs()
+            }
         }
+
         stage("Checkout from SCM"){
             steps{
                 git branch: 'main', credentialId: 'GitHub', url: 'https://github.com/almogbrooker/k8s-project'
