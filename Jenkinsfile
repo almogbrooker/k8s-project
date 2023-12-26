@@ -24,10 +24,10 @@ pipeline{
             steps{
                            
                             // Build Docker image for Producer
-                    sh 'docker-compose -f docker-compose.yml build ./producer'
+                    sh 'docker-compose -f docker-compose.yml build producer'
 
                     // Build Docker image for Consumer
-                    sh 'docker-compose -f docker-compose.yml build ./consumer'
+                    sh 'docker-compose -f docker-compose.yml build  consumer'
 
             }
         }
