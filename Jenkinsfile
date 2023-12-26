@@ -22,7 +22,8 @@ pipeline{
 
         stage("Build Docker Images"){
             steps{
-                                    // Build Docker image for Producer
+                           
+                            // Build Docker image for Producer
                     sh 'docker-compose -f docker-compose.yml build ./producer'
 
                     // Build Docker image for Consumer
