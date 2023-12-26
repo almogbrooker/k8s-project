@@ -23,15 +23,13 @@ pipeline{
         stage("Build Docker Images"){
             steps{            
                     // Build Docker image for Producer
-                    sh 'docker-compose -f docker-compose.yml build -t coscoson/producer-image'
-
-                    // Build Docker image for Consumer
-                    sh 'docker-compose -f docker-compose.yml build -t coscoson/consumer-image'
+                    sh 'docker-compose -f docker-compose.yml build'
 
             }
         }
         stage('Push Docker Images') {
             steps {
+                    sh 'docker images'
                     // Push Docker images to a registry (if needed)
                     sh 'docker push coscoson/producer-image:latest'
                     sh 'docker push coscoson/consumer-image:latest'
