@@ -14,7 +14,7 @@ pipeline{
             }
         }
 
-        stage("Checkout from SCM"){
+        stage("Clone From Github"){
             steps{
                 git branch: 'main', credentialsId: 'GitHub', url: 'https://github.com/almogbrooker/k8s-project'
             }
@@ -29,12 +29,22 @@ pipeline{
         }
         stage('Push Docker Images') {
             steps {
-                    sh 'docker images'
                     // Push Docker images to a registry (if needed)
                     sh 'docker push coscoson/producer-image:latest'
                     sh 'docker push coscoson/consumer-image:latest'
-                
             }
         }
+        stage('Deploy RabbitMQ') {
+            steps {
+                script {
+                    // Add the RabbitMQ Helm repository
+                    sh 'helm repo add bitnami https://charts.bitnami.com/bitnami'
+                    
+                    // Install RabbitMQ using Helm
+                    sh 'helm install my-rabbitmq bitnami/rabbitmq'
+                }
+            }
+        }
+        
     }
 }
